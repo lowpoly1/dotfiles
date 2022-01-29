@@ -1,0 +1,183 @@
+/* Nord Rainbow User ID */
+.subtext-2HDqJ7,
+.customStatus-1UAQAK,
+.hovered-20u3oh,
+.title-338goq {
+    background-image: linear-gradient(to left, #ca4552, #c25c5c, #e28467, #ebcb8b, #9ece74, #64a3a2, #bb96b4, #a68fb6, #c787bb, #bd5a80, #b4555a);
+    animation: gradient-border 4s linear infinite;
+    background-size: 400% 100%;
+    color: transparent !important;
+    -webkit-background-clip: text;
+    z-index: 1;
+}
+@keyframes gradient-border {
+from {
+  background-position: 0 0;
+}
+to {
+  background-position: 135% 0;
+}
+}
+
+/* Gradient on active channel*/
+.containerDefault-YUSmu3.selected-2TbFuo .name-28HaxV {
+    background-image: linear-gradient(to left, var(--background-modifier-selected), var(--interactive-active));
+    flex: 0 1 auto;
+    color: transparent !important;
+    -webkit-background-clip: text;
+    z-index: 1;
+}
+
+/*avatar only members list until hover*/
+.membersWrap-3NUR2t {
+  min-width: unset;
+}
+.membersWrap-3NUR2t .members-3WRCEx {
+  max-width: 65px;
+  min-width: 65px;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+.membersWrap-3NUR2t .members-3WRCEx:hover {
+  max-width: 240px;
+  min-width: 240px;
+}
+.membersWrap-3NUR2t .members-3WRCEx .content-2a4AW9:not(:hover) {
+  padding-top: 10px;
+  background-color: var(--background-secondary);
+}
+
+.membersGroup-2eiWxl {
+  margin-left: 60px;
+  background-color: var(--background-secondary);
+  color: #d8dee9;
+}
+
+.members-3WRCEx,
+.members-3WRCEx > div {
+  background-color: var(--background-secondary);
+}
+
+
+.unread-2lAfLh {
+    background-color: var(--unread-indicator);
+}
+
+.username-1A8OIy {
+    color: var(--username);
+}
+
+.containerDefault--pIXnN:hover .channelName-2YrOjO {
+  color: var(--channels-default-hover);
+}
+
+.modeConnected-3IsKId .name-23GUGE, .modeUnread-1qO3K1 .name-23GUGE, .notInteractive-1X92pj.modeConnected-3IsKId .name-23GUGE, .notInteractive-1X92pj.modeSelected-346R90 .name-23GUGE {
+    color: var(--unread-channel);
+}
+
+/*.channelName-3KPsGw {
+    color: var(--selected-channel);
+}*/
+
+/*.modeSelected-346R90:hover .channelName-2YrOjO {
+  color: var(--selected-channel-hover);
+}*/
+
+.containerDefault--pIXnN:hover .container-2ax-kl {
+    color: var(--category-hover);
+}
+
+.replyBar-1oi75v, .threadSuggestionBar-3ExSyc {
+    border-radius: 8px;
+    background: var(--background-reply-bar);
+}
+
+.clipContainer-31nYlH {
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.attachedBars-2BCP3l {
+    padding-bottom: 5px;
+    background: #00000000;
+}
+
+.clipContainer-eeROt0 {
+    padding-top: 0px;
+}
+
+.theme-dark {
+    --header-primary: #fff;
+    --header-secondary: #b9bbbe;
+    --text-normal: #8fbcbb;
+    --text-muted: #72767d;
+    --text-link: hsl(197,calc(var(--saturation-factor, 1)*100%),47.8%);
+    --text-link-low-saturation: hsl(197,calc(var(--saturation-factor, 1)*100%),52.9%);
+    --text-positive: hsl(139,calc(var(--saturation-factor, 1)*66.8%),58.6%);
+    --text-warning: hsl(38,calc(var(--saturation-factor, 1)*95.7%),54.1%);
+    --text-danger: hsl(359,calc(var(--saturation-factor, 1)*82.6%),59.4%);
+    --text-brand: hsl(235,calc(var(--saturation-factor, 1)*86.1%),77.5%);
+    --username: #81a1c1;
+    --unread-channel: #ebcb8b;
+    --unread-indicator: #ebcb8b;
+    --selected-channel: #f5daa4;
+    --selected-channel-hover: #d4a64a;
+    --channels-default: #d08770;
+    --channels-default-hover: #b48ead;
+    --category-hover: #b48ead;
+    --interactive-normal: #ebcb8b;
+    --interactive-hover: #b48ead;
+    --interactive-active: #ebcb8b;
+    --interactive-muted: #4f545c;
+    --background-primary: #434c5e;
+    --background-secondary: #3b4252;
+    --background-secondary-alt: #2e3440;
+    --background-tertiary: #2e3440;
+    --background-accent: #434c5e;
+    --background-floating: #2e3440d6;
+    --background-nested-floating: #2f3136d6;
+    --background-mobile-primary: #36393f;
+    --background-mobile-secondary: #2f3136;
+    --background-modifier-hover: rgba(79,84,92,0.16);
+    --background-modifier-active: rgba(79,84,92,0.24);
+    --background-modifier-selected: #bf616a66;
+    --background-modifier-accent: #00000000;
+    --background-reply-bar: #3b4252;
+    --info-positive-text: #fff;
+    --info-warning-text: #fff;
+    --info-danger-text: #fff;
+    --info-help-background: hsla(197,calc(var(--saturation-factor, 1)*100%),47.8%,0.1);
+    --info-help-foreground: hsl(197,calc(var(--saturation-factor, 1)*100%),47.8%);
+    --info-help-text: #fff;
+    --status-warning-text: #000;
+    --scrollbar-thin-thumb: #2e344000;
+    --scrollbar-thin-track: transparent;
+    --scrollbar-auto-thumb: #00000000;
+    --scrollbar-auto-track: #00000000;
+    --scrollbar-auto-scrollbar-color-thumb: #20222500;
+    --scrollbar-auto-scrollbar-color-track: #2f313600;
+    --elevation-stroke: 0 0 0 1px rgba(4,4,5,0.15);
+    --elevation-low: 0 1px 0 rgba(4,4,5,0.2),0 1.5px 0 rgba(6,6,7,0.05),0 2px 0 rgba(4,4,5,0.05);
+    --elevation-medium: 0 4px 4px rgba(0,0,0,0.16);
+    --elevation-high: 0 8px 16px rgba(0,0,0,0.24);
+    --logo-primary: #fff;
+    --control-brand-foreground: hsl(235,calc(var(--saturation-factor, 1)*86.1%),77.5%);
+    --control-brand-foreground-new: hsl(235,calc(var(--saturation-factor, 1)*86.1%),77.5%);
+    --background-mentioned: hsla(38,calc(var(--saturation-factor, 1)*95.7%),54.1%,0.1);
+    --background-mentioned-hover: hsla(38,calc(var(--saturation-factor, 1)*95.7%),54.1%,0.08);
+    --background-message-hover: rgba(4,4,5,0.07);
+    --guild-header-text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+    --channeltextarea-background: #434c5e;
+    --activity-card-background: #202225;
+    --textbox-markdown-syntax: #8e9297;
+    --deprecated-card-bg: rgba(32,34,37,0.6);
+    --deprecated-card-editable-bg: rgba(32,34,37,0.3);
+    --deprecated-store-bg: #36393f;
+    --deprecated-quickswitcher-input-background: #72767d;
+    --deprecated-quickswitcher-input-placeholder: hsla(0,0%,100%,0.3);
+    --deprecated-text-input-bg: rgba(0,0,0,0.1);
+    --deprecated-text-input-border: rgba(0,0,0,0.3);
+    --deprecated-text-input-border-hover: #040405;
+    --deprecated-text-input-border-disabled: #202225;
+    --deprecated-text-input-prefix: #dcddde;
+}
