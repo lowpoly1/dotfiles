@@ -11,7 +11,7 @@ _gitinfo() {
 	if git -C . rev-parse 2>/dev/null; then
 		echo -n "\e[31mM:\e[0m $(git status --porcelain | grep ' M' | wc -l)   \e[32mM:\e[0m $(git status --porcelain | grep 'M  ' | wc -l)   \e[31mA:\e[0m $(git status --porcelain | grep '??' | wc -l)   \e[32mA:\e[0m $(git status --porcelain | grep 'A ' | wc -l)\n\e[34m├\e[0m branch: $(__git_ps1 %s)"
 	else
-		echo -n "\e[38;5;173mpwd not a git repository\e[0m"
+		echo -n "\e[35mpwd not a git repository\e[0m"
 	fi
 }
 
