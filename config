@@ -1,0 +1,175 @@
+
+font pango:Noto Sans Regular 10
+
+set $mod Mod4
+
+workspace_layout default
+
+# hide window borders
+new_window pixel 0
+for_window [class="^.*"] border pixel 0
+default_border none
+default_floating_border none
+
+gaps inner 8
+gaps outer 0
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# switch to workspace
+bindsym $mod+1    workspace  $ws1
+bindsym $mod+2    workspace  $ws2
+bindsym $mod+3    workspace  $ws3
+bindsym $mod+4    workspace  $ws4
+bindsym $mod+5    workspace  $ws5
+bindsym $mod+6    workspace  $ws6
+bindsym $mod+7    workspace  $ws7
+bindsym $mod+8    workspace  $ws8
+bindsym $mod+9    workspace  $ws9
+bindsym $mod+0    workspace  $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1    move container to workspace  $ws1
+bindsym $mod+Shift+2    move container to workspace  $ws2
+bindsym $mod+Shift+3    move container to workspace  $ws3
+bindsym $mod+Shift+4    move container to workspace  $ws4
+bindsym $mod+Shift+5    move container to workspace  $ws5
+bindsym $mod+Shift+6    move container to workspace  $ws6
+bindsym $mod+Shift+7    move container to workspace  $ws7
+bindsym $mod+Shift+8    move container to workspace  $ws8
+bindsym $mod+Shift+9    move container to workspace  $ws9
+bindsym $mod+Shift+0    move container to workspace  $ws10
+
+# resize window (you can also use the mouse for that):
+mode "resize" {
+
+    	bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Shift+Left resize shrink width 1 px or 1 ppt
+        bindsym Shift+Right resize grow width 1 px or 1 ppt
+        bindsym Shift+Down resize grow height 1 px or 1 ppt
+        bindsym Shift+Up resize shrink height 1 px or 1 ppt
+
+	    bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# start a terminal
+bindsym $mod+Return exec kitty
+
+# kill focused window
+bindsym $mod+q kill
+
+# exit menu
+bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
+
+# or simply suspend
+bindsym $mod+s exec systemctl suspend
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 in place
+bindsym $mod+Shift+r restart
+
+# keybinding in rofi
+bindsym F1 exec ~/.config/i3/scripts/keyhint-2
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Audio controls
+bindsym $mod+Shift+p exec playerctl play-pause
+bindsym $mod+Ctrl+Left exec playerctl previous
+bindsym $mod+Ctrl+Right exec playerctl next
+bindsym $mod+Ctrl+Up exec amixer -D pulse sset Master 2%+ && pkill -RTMIN+1 i3blocks
+bindsym $mod+Ctrl+Down exec amixer -D pulse sset Master 2%- && pkill -RTMIN+1 i3blocks
+
+bindsym Print exec "scrot ~/Screenshots/%Y-%m-%d-%T-screenshot.png"
+
+exec --no-startup-id picom -b
+
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+exec --no-startup-id dex --autostart --environment i3
+
+exec xwinwrap -ni -b -s -fs -ov -nf -d -- gifview -w WID ~/Downloads/background.gif -a
+
+exec --no-startup-id xset s 480 dpms 600 600 600
+
+exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
+
+exec_always --no-startup-id autotiling
+
+exec --no-startup-id kitty
+
+for_window [class="Yad" instance="yad"] floating enable
+for_window [class="Galculator" instance="galculator"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [class="Xsane" instance="xsane"] floating enable
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="qt5ct" instance="qt5ct"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [window_role="About"] floating enable
+
+# Define colors variables:
+set $darkbluetrans	#08052be6
+set $darkblue		#08052b
+set $lightblue		#5294e2
+set $urgentred		#e53935
+set $white			#ffffff
+set $black			#000000
+set $purple			#e345ff
+set $darkgrey		#383c4a
+set $darkgreytrans  #383c4a00
+set $grey			#b0b5bd
+set $mediumgrey		#8b8b8b
+set $yellowbrown	#e1b700
+
+bar {
+		font pango:Noto Sans Regular 10, FontAwesome 10
+		status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	    position bottom
+	    i3bar_command i3bar --transparency
+		strip_workspace_numbers yes
+
+		colors {
+			separator           $purple
+		    background          $darkgreytrans
+		    statusline          $white
+#                          		border 		        bg	 	    	txt		    indicator
+			focused_workspace	$mediumgrey	    	$grey			$darkgrey	$purple
+			active_workspace	$lightblue      	$mediumgrey		$darkgrey	$purple
+			inactive_workspace	$darkgreytrans 		$darkgreytrans	$grey		$purple
+			urgent_workspace	$urgentred	    	$urgentred		$white		$purple
+		}
+}
+
+bindsym $mod+d exec rofi -modi drun -show drun \
+		-config ~/.config/rofi/rofidmenu.rasi
