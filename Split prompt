@@ -24,7 +24,7 @@ _exit_status_before_prompt=$?
 
 # Create prompt string
 printf -v PS1RHS1 "\e[0m[ \e[0;1;34m$(dirs) \e[0m]"
-printf -v PS1RHS2 "\e[0m[ \e[32mRAM:\e[0m $(free -g --si | grep -oP '\d+' | head -n 1)GB \e[0m]"
+printf -v PS1RHS2 "\e[0m[ \e[32mRAM:\e[0m $(free -h | awk -F' ' '/Mem/{print $4 " / " $2}') \e[0m]"
 
 # Strip ANSI commands before counting length
 # From: https://www.commandlinefu.com/commands/view/12043/remove-color-special-escape-ansi-codes-from-text-with-sed
@@ -43,7 +43,7 @@ local Rest='\e[u' # Restore cursor to save point
 # printed characters so that the prompt doesn't do strange things when
 # editing the entered text.
 
-PS1="\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS1_stripped}D${PS1RHS1}${Rest}\]$(_gitinfo)\n\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS2_stripped}D${PS1RHS2}${Rest}\]\e[32mSpace:\e[0m $(df -l --total -h | awk -F' ' '/total/{print $3}')B / $(df -l --total -h | awk -F' ' '/total/{print $2}')B\e[F$(_actual_prompt)"
+PS1="\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS1_stripped}D${PS1RHS1}${Rest}\]$(_gitinfo)\n\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS2_stripped}D${PS1RHS2}${Rest}\]\e[32mSpace:\e[0m $(df -l --total -h | awk -F' ' '/total/{print $3 "B / " $2}')B\e[F$(_actual_prompt)"
 }
 PROMPT_COMMAND=_full_prompt
 PS0="\n\n"
