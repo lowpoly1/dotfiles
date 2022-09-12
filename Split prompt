@@ -1,0 +1,49 @@
+# !! PUT THIS IN YOUR ~/.bashrc !!
+
+_gitinfo() {
+	if git -C . rev-parse 2>/dev/null; then
+		echo -n "\e[31mM:\e[0m $(git status --porcelain | grep ' M' | wc -l)   \e[32mM:\e[0m $(git status --porcelain | grep 'M  ' | wc -l)   \e[31mA:\e[0m $(git status --porcelain | grep '??' | wc -l)   \e[32mA:\e[0m $(git status --porcelain | grep 'A ' | wc -l)"
+	else
+		echo -n "\e[35mpwd not a git repository\e[0m"
+	fi
+}
+
+_exit_status_before_prompt=$?
+
+_actual_prompt() {
+	if [ ${_exit_status_before_prompt} -eq 0 ]; then
+		echo -en "\e[32m:) \e[0m"
+	else
+		echo -en "\e[31m:( \e[0m"
+	fi
+}
+
+_full_prompt() {
+# Save exit status of last command in variable so it isn't overwritten by the commands in the prompt
+_exit_status_before_prompt=$?
+
+# Create prompt string
+printf -v PS1RHS1 "\e[0m[ \e[0;1;34m$(dirs) \e[0m]"
+printf -v PS1RHS2 "\e[0m[ \e[32mRAM:\e[0m $(free -g --si | grep -oP '\d+' | head -n 1)GB \e[0m]"
+
+# Strip ANSI commands before counting length
+# From: https://www.commandlinefu.com/commands/view/12043/remove-color-special-escape-ansi-codes-from-text-with-sed
+PS1RHS1_stripped=$(sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" <<<"$PS1RHS1")
+PS1RHS2_stripped=$(sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" <<<"$PS1RHS2")
+
+# Reference: https://en.wikipedia.org/wiki/ANSI_escape_code
+local Save='\e[s' # Save cursor position
+local Rest='\e[u' # Restore cursor to save point
+
+# Save cursor position, jump to right hand edge, then go left N columns where
+# N is the length of the printable RHS string. Print the RHS string, then
+# return to the saved position and print the LHS prompt.
+
+# Note: "\[" and "\]" are used so that bash can calculate the number of
+# printed characters so that the prompt doesn't do strange things when
+# editing the entered text.
+
+PS1="\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS1_stripped}D${PS1RHS1}${Rest}\]$(_gitinfo)\n\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS2_stripped}D${PS1RHS2}${Rest}\]\e[32mSpace:\e[0m $(df -l --total -h | awk -F' ' '/total/{print $3}')B / $(df -l --total -h | awk -F' ' '/total/{print $2}')B\e[F$(_actual_prompt)"
+}
+PROMPT_COMMAND=_full_prompt
+PS0="\n\n"
