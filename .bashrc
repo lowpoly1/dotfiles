@@ -1,6 +1,8 @@
 #
 # ~/.bashrc
 #
+# heavily adapted from default EndeavourOS file
+#
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
