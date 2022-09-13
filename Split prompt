@@ -43,7 +43,7 @@ local Rest='\e[u' # Restore cursor to save point
 # printed characters so that the prompt doesn't do strange things when
 # editing the entered text.
 
-PS1="\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS1_stripped}D${PS1RHS1}${Rest}\]$(_gitinfo)\n\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS2_stripped}D${PS1RHS2}${Rest}\]\e[32mSpace:\e[0m $(df -l --total -h | awk -F' ' '/total/{print $3 "B / " $2}')B\e[F$(_actual_prompt)"
+PS1="\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS1_stripped}D${PS1RHS1}${Rest}\]$(_gitinfo)\n\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS2_stripped}D${PS1RHS2}${Rest}\]\e[32mSpace:\e[0m $(df -l --total -h | awk -F' ' '/total/{print $3 "B / " $2}')B\e[F\[$(_actual_prompt)\]"
 }
 PROMPT_COMMAND=_full_prompt
 PS0="\n\n"
