@@ -1,10 +1,8 @@
-# !! PUT THIS IN YOUR ~/.bashrc !!
-
 _gitinfo() {
 	if git -C . rev-parse 2>/dev/null; then
 		echo -n "\e[31mM:\e[0m $(git status --porcelain | grep ' M' | wc -l)   \e[32mM:\e[0m $(git status --porcelain | grep 'M  ' | wc -l)   \e[31mA:\e[0m $(git status --porcelain | grep '??' | wc -l)   \e[32mA:\e[0m $(git status --porcelain | grep 'A ' | wc -l)"
 	else
-		echo -n "\e[35mpwd not a git repository\e[0m"
+		echo -n "\e[0;1;31m \e[0m"
 	fi
 }
 
@@ -23,8 +21,8 @@ _full_prompt() {
 _exit_status_before_prompt=$?
 
 # Create prompt string
-printf -v PS1RHS1 "\e[0m[ \e[0;1;34m$(dirs) \e[0m]"
-printf -v PS1RHS2 "\e[0m[ \e[32mRAM:\e[0m $(free -h | awk -F' ' '/Mem/{print $4 " / " $2}') \e[0m]"
+printf -v PS1RHS1 "\e[0m[ \e[32m🖴 -\e[34m $(df -l --total -h | awk -F' ' '/total/{print $3 "B / " $2}')B \e[0m]"
+printf -v PS1RHS2 "\e[0m[ \e[32m -\e[34m $(free -h | awk -F' ' '/Mem/{print $4 " / " $2}') \e[0m]"
 
 # Strip ANSI commands before counting length
 # From: https://www.commandlinefu.com/commands/view/12043/remove-color-special-escape-ansi-codes-from-text-with-sed
@@ -43,7 +41,7 @@ local Rest='\e[u' # Restore cursor to save point
 # printed characters so that the prompt doesn't do strange things when
 # editing the entered text.
 
-PS1="\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS1_stripped}D${PS1RHS1}${Rest}\]$(_gitinfo)\n\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS2_stripped}D${PS1RHS2}${Rest}\]\e[32mSpace:\e[0m $(df -l --total -h | awk -F' ' '/total/{print $3 "B / " $2}')B\e[F\[$(_actual_prompt)\]"
+PS1="\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS1_stripped}D${PS1RHS1}${Rest}\]\e[32m - $(_gitinfo)\n\n\[${Save}\e[${COLUMNS:-$(tput cols)}C\e[${#PS1RHS2_stripped}D${PS1RHS2}${Rest}\]\e[32m - \e[0;1;34m$(dirs)\e[0m\e[F$(_actual_prompt)"
 }
 PROMPT_COMMAND=_full_prompt
 PS0="\n\n"
